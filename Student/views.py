@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from .forms import LoginForm
 from Faculty.models import StudentLogin
+
 # Create your views here.
 
 
