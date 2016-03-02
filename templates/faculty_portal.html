@@ -3,9 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Student Portal</title>
+    <link href="../static/CSS/faculty_base.css" rel="stylesheet"/>
 </head>
 <body>
-    <a href="logout">Logout {{ username }}</a>
-    {{ data }}
+    <div id="header">
+        <table>
+            <tr>
+                <td align="center" class="bigSpan">
+                    <h2> Student Assessment </h2>
+                    <h3><u> Faculty Portal </u></h3>
+                </td>
+                <td align="right" class="smallSpan">
+                    <a href="logout" id="logoutLink">Logout {{ username }}</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="content-main">
+        {{ data }} <br />
+        <a href="createMCQTest" class="linkButton"> NEW MCQ TEST + </a> <br />
+        <a href="createCodeTest" class="linkButton"> NEW CODE TEST + </a> <br />
+    </div>
 </body>
 </html>

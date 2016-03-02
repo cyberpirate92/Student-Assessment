@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Code Test</title>
+    <style type="text/css">
+        body {
+            margin:0;
+            margin-top:0;
+            padding:0;
+            top:0
+        }
+        div#header {
+            background:teal;
+            color:white;
+            font-family:Inconsolata,Constantia,Verdana,sans-serif;
+            font-size: 1em;
+            text-align: center;
+            line-height: 1;
+            padding:1%;
+        }
+        a#logoutLink {
+            text-decoration:none;
+            color:teal;
+            font-weight:bold;
+            font-size:0.8em;
+            background:white;
+            padding:2px;
+        }
+        a#logoutLink:hover {
+            text-decoration: underline;
+        }
+        #header table {
+            width:90%;
+        }
+        td.bigSpan {
+            text-indent:25%;
+            width: 90%;
+            vertical-align: bottom;
+        }
+        td.smallSpan{
+            vertical-align: bottom;
+            text-align: right;
+        }
+        div#content-main{
+            margin-left:5%;
+            margin-right:5%;
+            line-height:1.5;
+        }
+        a.linkButton{
+            text-decoration: none;
+            background:teal;
+            color:white;
+            font-weight:bold;
+            font-family:'Lucida Sans',Helvetica;
+            font-size:0.8em;
+            padding:3px 6px;
+            border-radius:10px;
+        }
+        div#sidePane{
+            background:teal;
+            float:left;
+            width:15%;
+            padding:2%;
+            margin-top:5%;
+            color:white;
+        }
+        div#workspace{
+            width:75%;
+            padding:2%;
+            margin-left:20%;
+        }
+        #workspace h4{
+            color:teal;
+            text-decoration: underline;
+            text-indent:5%;
+        }
+        #sidePane-questionsNav a {
+            text-decoration: none;
+            color:black;
+            font-weight:bold;
+        }
+        #sidePane-questionsNav td{
+            border:2px solid white;
+            text-align:center;
+            background:wheat;
+        }
+        #sidePane-questionsNav td:hover {
+            border:2px solid tomato;
+            cursor:pointer;
+        }
+        div#sidePane-buttons {
+            margin-top:5%;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <table>
+            <tr>
+                <td align="center" class="bigSpan">
+                    <h2> Student Assessment </h2>
+                    <h3><u> Faculty Portal </u></h3>
+                </td>
+                <td align="right" class="smallSpan">
+                    <a href="logout" id="logoutLink">Logout {{ username }}</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="content-main">
+        <div id="sidePane">
+            <div id="sidePane-aboutTest">
+                <p><strong>Test Name :</strong> {{ test_name }} </p>
+                <p><strong>Test ID#  :</strong> {{ test_id }} </p>
+            </div>
+            <div id="sidePane-questionsNav">
+                <table width="90%">
+                    {{ question_nav_table | safe }}
+                </table>
+            </div>
+            <div id="sidePane-buttons">
+                <button>Discard Test </button>
+            </div>
+        </div>
+        <div id="workspace">
+            <form>
+                {% csrf_token %}
+                <h4> Question </h4>
+                <textarea name="question" rows="10" cols="100"></textarea>
+                <h4> Test Case 1 </h4>
+                <textarea name="testcase1_input" rows="5" cols="45"></textarea>
+                <textarea name="testcase1-output" rows="5" cols="45"></textarea>
+                <h4> Test Case 2 </h4>
+                <textarea name="testcase2_input" rows="5" cols="45"></textarea>
+                <textarea name="testcase2-output" rows="5" cols="45"></textarea>
+                <h4> Test Case 3 </h4>
+                <textarea name="testcase3_input" rows="5" cols="45"></textarea>
+                <textarea name="testcase3-output" rows="5" cols="45"></textarea>
+                <br />
+                <input type="submit" value="Save & Next">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

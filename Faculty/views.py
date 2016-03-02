@@ -45,3 +45,25 @@ def faculty_portal(request):
 def logout(request):
     request.session.flush()
     return HttpResponseRedirect('login')
+
+
+def createCodeTest(request):
+    pass
+
+
+# This is a temporary view for debugging,
+
+
+def debugCodeTest(request):
+    html = '<tr>'
+    for i in range(6):
+        html += "<td><a href='#'>"+str(i+1)+"</a></td>"
+        if i != 0 and (i+1)%5 == 0:
+            html += "</tr><tr>"
+    html+="</tr>"
+    template_data = dict()
+    template_data['username'] = 'ram'
+    template_data['test_name'] = 'Python Basics'
+    template_data['test_id'] = '119982'
+    template_data['question_nav_table'] = html
+    return render(request,'faculty_create_code_test.html',template_data)
