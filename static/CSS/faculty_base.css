@@ -28,11 +28,12 @@ a#logoutLink:hover {
     width:90%;
 }
 td.bigSpan {
+    text-indent:25%;
     width: 90%;
     vertical-align: bottom;
 }
 td.smallSpan{
-    vertical-align: text-bottom;
+    vertical-align: bottom;
     text-align: right;
 }
 div#content-main{

@@ -92,12 +92,6 @@
         div#sidePane-buttons {
             margin-top:5%;
         }
-        #error{
-            color:red;
-            font-family:monospace;
-            font-weight:bold;
-            font-size:12pt;
-        }
     </style>
 </head>
 <body>
@@ -114,9 +108,6 @@
             </tr>
         </table>
     </div>
-    <div id="error">
-        {{ error }}
-    </div>
     <div id="content-main">
         <div id="sidePane">
             <div id="sidePane-aboutTest">
@@ -129,24 +120,24 @@
                 </table>
             </div>
             <div id="sidePane-buttons">
-                <a href="finish_code_test"></a><button> Finish Test </button></a>
-                <a href="discard_code_test"></a><button>Discard Test </button></a>
+                <button> Finish Test </button>
+                <button>Discard Test </button>
             </div>
         </div>
         <div id="workspace">
-            <form action="createCodeTest" method="POST">
+            <form>
                 {% csrf_token %}
                 <h4> Question </h4>
-                {{ form.question }}
+                <textarea name="question" rows="10" cols="100"></textarea>
                 <h4> Test Case 1 </h4>
-                {{ form.t1_input }}
-                {{ form.t1_output }}
+                <textarea name="testcase1_input" rows="5" cols="45">{{ t1_input }}</textarea>
+                <textarea name="testcase1-output" rows="5" cols="45"> {{ t1_output }}</textarea>
                 <h4> Test Case 2 </h4>
-                {{ form.t2_input }}
-                {{ form.t2_output }}
+                <textarea name="testcase2_input" rows="5" cols="45"> {{ t2_input }}</textarea>
+                <textarea name="testcase2-output" rows="5" cols="45"> {{ t2_output }}</textarea>
                 <h4> Test Case 3 </h4>
-                {{ form.t3_input }}
-                {{ form.t3_output }}
+                <textarea name="testcase3_input" rows="5" cols="45"> {{ t3_input }}</textarea>
+                <textarea name="testcase3-output" rows="5" cols="45">{{ t3_output }}</textarea>
                 <br />
                 <input type="submit" value="Save & Next">
             </form>

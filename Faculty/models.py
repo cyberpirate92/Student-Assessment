@@ -1,5 +1,6 @@
 from django.db import models
-
+import datetime
+from django.utils import timezone
 
 class FacultyLogin(models.Model):
     username = models.CharField(max_length=20,primary_key=True)
@@ -11,6 +12,8 @@ class FacultyLogin(models.Model):
 class TestInfo(models.Model):
     test_name = models.CharField(max_length=30,null=True)
     test_id = models.IntegerField(primary_key=True)
+    test_creation_date = models.DateTimeField(default=timezone.now())
+    test_last_edited = models.DateTimeField(default=timezone.now())
     faculty_id = models.ForeignKey(FacultyLogin,on_delete=models.CASCADE)
 
 
@@ -19,8 +22,12 @@ class StudentLogin(models.Model):
     password = models.CharField(max_length=255)
 
 
+# django creates a id field which is auto incremented, that will be used for question_id
+
+
 class MCQQuestion(models.Model):
     question = models.TextField()
+    question_number = models.IntegerField(default=0)
     choice1 = models.CharField(max_length=300)
     choice2 = models.CharField(max_length=300)
     choice3 = models.CharField(max_length=300)
@@ -28,15 +35,28 @@ class MCQQuestion(models.Model):
     correctAnswer = models.IntegerField(default=0)
     test_id = models.ForeignKey(TestInfo,on_delete=models.CASCADE)
 
+# django creates a id field which is auto incremented, that will be used for question_id
+
 
 class CodeQuestion(models.Model):
     question = models.TextField()
+    question_number = models.IntegerField(default=0)
     testcase1_input = models.TextField()
     testcase2_input = models.TextField()
     testcase3_input = models.TextField()
     testcase1_output = models.TextField()
     testcase2_output = models.TextField()
     testcase3_output = models.TextField()
+    test_id = models.ForeignKey(TestInfo,on_delete=models.CASCADE)
+
+class CodeQuestionV2(models.Model):
+    question = models.TextField()
+    question_number = models.IntegerField(default=0)
+    visible_test_case_input = models.TextField()
+    visible_test_case_output = models.TextField()
+    hidden_test_case_input = models.TextField()
+    hidden_test_case_output = models.TextField()
+    max_exec_time = models.IntegerField()
     test_id = models.ForeignKey(TestInfo,on_delete=models.CASCADE)
 
 # In the below model, the question id could also be declared to be a foreign key referencing the MCQQuestions Model,
@@ -75,5 +95,6 @@ class Student_Subject(models.Model):
     student_username = models.ForeignKey(StudentLogin,on_delete=models.CASCADE)
     faculty_username = models.ForeignKey(FacultyLogin,on_delete=models.CASCADE)
     subject = models.CharField(max_length=15)
+
 
 

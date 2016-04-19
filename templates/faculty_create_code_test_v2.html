@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Code Test</title>
+    <script type="text/javascript">
+        function countTestCases(str)
+        {
+            var count = (str.match(/\$END/g) || []).length;
+            document.getElementById('num_test_cases').value = count;
+        }
+    </script>
     <style type="text/css">
         body {
             margin:0;
@@ -129,25 +136,26 @@
                 </table>
             </div>
             <div id="sidePane-buttons">
-                <a href="finish_code_test"></a><button> Finish Test </button></a>
-                <a href="discard_code_test"></a><button>Discard Test </button></a>
+                <a href="finish_code_test"><button> Finish Test </button></a>
+                <a href="discard_code_test"><button>Discard Test </button></a>
             </div>
         </div>
         <div id="workspace">
-            <form action="createCodeTest" method="POST">
+            <form action="createCodeTestv2" method="POST">
                 {% csrf_token %}
                 <h4> Question </h4>
                 {{ form.question }}
-                <h4> Test Case 1 </h4>
-                {{ form.t1_input }}
-                {{ form.t1_output }}
-                <h4> Test Case 2 </h4>
-                {{ form.t2_input }}
-                {{ form.t2_output }}
-                <h4> Test Case 3 </h4>
-                {{ form.t3_input }}
-                {{ form.t3_output }}
-                <br />
+
+                <h4> Hidden Test Cases </h4>
+                {{ form.hidden_test_case_input }}
+                {{ form.hidden_test_case_output }}
+
+                <h4> Visible Test Cases </h4>
+                {{ form.visible_test_case_input }}
+                {{ form.visible_test_case_output }}
+
+                <h4> Max Execution Time </h4>
+                {{ form.max_exec_time }}
                 <input type="submit" value="Save & Next">
             </form>
         </div>
