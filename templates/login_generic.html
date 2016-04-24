@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}" />
 </head>
 <body>
     <form action="{{ form_action }}" method="POST">
