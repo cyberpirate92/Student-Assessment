@@ -74,6 +74,9 @@ class Compiler:
     hasErrors = False
     hasExecuted = False
     hasFile = False
+    num_hidden_test_cases = 0
+    percentage_visible_correct = 0  # updated when check_outputs() runs
+    percentage_hidden_correct = 0   # updated when check_outputs() runs
     maxExecTime = 5  # [unit: seconds] Default value, can be overridden
 
     def add_test_case(self, test_case):
@@ -84,6 +87,8 @@ class Compiler:
             self.test_cases.append(test_case)
         else:
             raise ValueError("Trying to add Invalid test case!")
+        if test_case.is_hidden_test_case:
+            self.num_hidden_test_cases += 1
         return
 
     def add_test_cases(self, test_case_list):
@@ -95,6 +100,12 @@ class Compiler:
             return 0
         else:
             return len(self.test_cases)
+
+    def get_num_hidden_test_cases(self):
+        return self.num_hidden_test_cases
+
+    def get_num_visible_test_cases(self):
+        return self.get_num_test_cases() - self.num_hidden_test_cases
 
     def get_num_failed_test_cases(self):
         return self.failed_test_cases
@@ -151,13 +162,17 @@ class Compiler:
 
     def delete_code_file(self):
         if self.filename is None:
-            print("*** ERROR: filename NONE ***")
-        os.remove(self.filename)
-        self.hasFile = False
-        self.filename = None
+            print("*** ERROR: filename NONE, could not delete file ***")
+        else:
+            os.remove(self.filename)
+            self.hasFile = False
+            self.filename = None
 
     def compare_outputs(self):
         index = 0
+        correct_hidden_cases = 0
+        correct_visible_cases = 0
+        is_correct = False
         values = []
         for test_case in self.test_cases:
             expected_output = test_case.get_output()
@@ -173,8 +188,13 @@ class Compiler:
             print("# Comparison : " + str(expected_output == actual_output))
             print("\n")
             # Debug ONLY............................
-
-            values.append(expected_output == actual_output)
+            is_correct = (expected_output == actual_output)
+            values.append(is_correct)
+            if is_correct:
+                if test_case.is_hidden_test_case:
+                    correct_hidden_cases += 1
+                else:
+                    correct_visible_cases += 1
             index += 1
 
         # Debug ONLY .....................
@@ -183,7 +203,20 @@ class Compiler:
             print(str(v))
         # Debug ONLY .....................
 
+        # calculating the percentages.....
+        self.percentage_hidden_correct = float((correct_hidden_cases / self.get_num_hidden_test_cases()) * 100)
+        self.percentage_visible_correct = float((correct_visible_cases / self.get_num_visible_test_cases()) * 100)
+
         return values
+
+    def get_hidden_pass_percentage(self):
+        return self.percentage_hidden_correct
+
+    def get_visible_pass_percentage(self):
+        return self.percentage_visible_correct
+
+    def get_overall_pass_percentage(self):
+        return float((self.percentage_hidden_correct + self.percentage_visible_correct) / 2)
 
     def execute(self):
         self.exec_status = ExecutionStatus.NYR

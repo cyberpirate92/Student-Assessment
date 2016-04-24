@@ -3,15 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
-    {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}" />
+    <style type="text/css">
+        body {
+            background:linear-gradient(270deg,wheat,teal);
+        }
+        input[type='text'],input[type='password'] {
+            padding:2%;
+            font-family:constantia,sans-serif;
+            border:1px solid whitesmoke;
+            text-indent: 5px;
+        }
+        input[type='button'],input[type='submit'],input[type='reset'] {
+            border:none;
+            background:linear-gradient(white,whitesmoke);
+            color:black;
+            padding:2%;
+            font-family:inherit;
+        }
+        label {
+            font-family:constantia,sans-serif;
+            font-weight:normal;
+        }
+        table {
+            font-family:constantia,sans-serif;
+            color:white;
+            background:rgba(0,0,0,0.8);
+            margin-left:35%;
+            margin-top:15%;
+            border:none;
+            padding:2%;
+            box-shadow: 5px 3px 25px 12px black;
+            -webkit-transition: linear 1s;
+            -moz-transition: linear 1s;
+            -ms-transition: linear 1s;
+            -o-transition: linear 1s;
+            transition: linear 1s;
+            border-radius:5px;
+        }
+        table:hover {
+            box-shadow: 5px 3px 35px 12px black;
+        }
+    </style>
 </head>
 <body>
     <form action="{{ form_action }}" method="POST">
         {% csrf_token %}
         <table>
+            <tr><th colspan="2">{{ title }}</th></tr>
+            <tr><td>&nbsp;</td></tr>
             {{ form.as_table }}
-            <tr><td colspan="2" align="right"> <input type="submit" /> </td></tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr><td colspan="2" align="center"> <input type="submit" value="Login" /> </td></tr>
         </table>
     </form>
 </body>

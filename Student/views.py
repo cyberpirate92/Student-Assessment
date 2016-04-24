@@ -65,7 +65,14 @@ def initiate_test(request,test_id):
             test_obj = TestInfo.objects.filter(test_id=test_id)
             num_questions = len(CodeQuestionV2.objects.filter(test_id_id=test_id))
             template_data = {"title": test_obj[0].test_name, "test": test_obj[0], "num_questions": num_questions}
+            request.session['current_question'] = 1;
             return render(request,'test_initiate.html',template_data)
+
+
+def user_is_logged_in(request):
+    if request.session.__contains__('username'):
+        return True
+    return False
 
 
 def test_id_exists(test_id):
@@ -95,20 +102,29 @@ def question_view(request,test_id,question_number):
                     compiler = CompilerUtils.Compiler()
                     compiler.set_code(code)
                     compiler.set_language(language)
+                    compiler.delete_code_file()
                     question_obj = CodeQuestionV2.objects.filter(test_id_id=test_id,question_number=question_number)[0]
                     visible_input = question_obj.visible_test_case_input
                     visible_output = question_obj.visible_test_case_output
                     hidden_input = question_obj.hidden_test_case_input
                     hidden_output = question_obj.hidden_test_case_output
                     test_cases = CompilerUtils.generate_test_cases(visible_input,visible_output)
-                    test_cases.extend(CompilerUtils.generate_test_cases(hidden_input,hidden_output))
+                    hidden_test_cases = CompilerUtils.generate_test_cases(hidden_input,hidden_output)
+                    for tc in hidden_test_cases:
+                        tc.is_hidden_test_case = True
+                    test_cases.extend(hidden_test_cases)
                     compiler.add_test_cases(test_cases)
                     compiler.execute()
                     status = compiler.exec_status
                     print("[*] Status : " + status.name)
                     template_data['status'] = status
+                    template_data['percentage'] = compiler.get_overall_pass_percentage()
+                    if status == CompilerUtils.ExecutionStatus.ACC:
+                        request.session['current_question'] = int(request.session['current_question']) + 1
                 else:
                     template_data['error'] = "Invalid submission!"
+
+                # TODO: Update session such that it provides the next question when the answer is accepted
 
             form = CodeSubmissionForm()
             username = request.session['username']

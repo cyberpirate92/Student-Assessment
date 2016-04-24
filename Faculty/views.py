@@ -6,8 +6,7 @@ from .models import FacultyLogin, TestInfo, CodeQuestion, CodeQuestionV2
 from . import utils
 import random
 
-# Create your views here.
-
+# Create your views here
 
 def testpage(request):
     return HttpResponse("<h2> Faculty Test Page <h2>")
@@ -15,7 +14,7 @@ def testpage(request):
 
 def login(request):
     #  If already logged in, redirect user to his/her portal
-    if request.session.__contains__('username'):
+    if request.session.__contains__('username') and request.session.__contains__('type'):
         return HttpResponseRedirect('faculty_portal')
     # else, login or serve the login form
     if request.method == 'POST':
@@ -27,6 +26,7 @@ def login(request):
             if FacultyLogin.objects.filter(username=faculty.username, password=faculty.password).exists():
                 request.session.create()
                 request.session['username'] = faculty.username
+                request.session['type'] = 'F'
                 return HttpResponseRedirect('faculty_portal')
             else:
                 form = LoginForm(request.POST)
