@@ -5,12 +5,18 @@
     <title>{{ title }}</title>
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/login-base.css' %}" />
+    <style type="text/css">
+        #header-title a {
+            text-decoration:none;
+            color:white;
+        }
+    </style>
 </head>
 <body>
     <div id="container">
         <div id="header">
             <div id="header-logo"> <img src="{% static 'images/vit-logo.png' %}" width="200px" height="75px"/> </div>
-            <div id="header-title"><h2> Assessment </h2></div>
+            <div id="header-title"><a href="/start"><h2> Assessment </h2></a></div>
         </div>
         <div id="content">
             <form action="{{ form_action }}" method="POST">

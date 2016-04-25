@@ -1,0 +1,100 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base_1.css' %}" />
+    <style type="text/css">
+        div.block {
+            border:none;
+            border-radius:5px;
+            margin-top:3%;
+            margin-left:10%;
+            float:left;
+            padding:2%;
+            width:20%;
+            text-align:center;
+            background:rgba(0,0,0,0.8);
+            color:white;
+            box-shadow: 2px 2px 20px 10px black;
+            -webkit-transition: linear 0.5s;
+            -moz-transition: linear 0.5s;
+            -ms-transition: linear 0.5s;
+            -o-transition: linear 0.5s;
+            transition: linear 0.5s;
+        }
+        div.block-image {
+            padding:10%;
+            margin-left:32%;
+            margin-right: 32%;
+            border-radius:55%;
+            font-size:1.4em;
+            margin-bottom:8%;
+            font-family:Constantia;
+        }
+        div.block-title {
+            margin-top:10%;
+            font-size: 1.1em;
+            text-decoration: underline;
+            text-transform: uppercase;
+        }
+        div.block-description {
+            margin-top:10%;
+            font-size:0.8em;
+        }
+        div#centered-block {
+            margin-top:4%;
+            padding-left:15%;
+        }
+        div.block:hover {
+            box-shadow: 2px 2px 20px 12px black;
+        }
+        div#faculty-block {
+            background:teal;
+            color:white;
+            border:2px solid teal;
+        }
+        div#student-block {
+            background:wheat;
+            color:black;
+            border:2px solid wheat;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <div id="header-logo"> <img src="{% static 'images/vit-logo.png' %}" width="200px" height="75px"/> </div>
+            <div id="header-title"><h2> Assessment </h2></div>
+        </div>
+        <div id="content">
+            <div id="centered-block">
+                <div class="block" onclick="location.href = 'student/login';" style="cursor:pointer">
+                    <div class="block-image" id="student-block">
+                        S
+                    </div>
+                    <hr>
+                    <div class="block-title">
+                        Student Portal
+                    </div>
+                    <div class="block-description">
+                        Take tests, View results
+                    </div>
+                </div>
+                <div class="block"  onclick="location.href = 'faculty/login';" style="cursor:pointer">
+                    <div class="block-image" id="faculty-block">
+                            F
+                    </div>
+                    <hr>
+                    <div class="block-title">
+                            Faculty Portal
+                    </div>
+                    <div class="block-description">
+                            Create tests, Analyze students performance
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

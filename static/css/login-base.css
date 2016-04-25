@@ -2,6 +2,9 @@ body {
     background:linear-gradient(270deg,wheat,teal);
     font-family: Monaco,Constantia,sans-serif;
 }
+#LoginTable {
+    text-align:center;
+}
 #LoginTable input[type='text'], #LoginTable input[type='password'] {
     padding:2%;
     font-family:constantia,sans-serif;
@@ -24,10 +27,6 @@ body {
 #LoginTable input[type='button']:hover, #LoginTable input[type='submit']:hover,input[type='reset']:hover {
     background:tomato;
 }
-label {
-    font-family:constantia,sans-serif;
-    font-weight:normal;
-}
 table#LoginTable {
     font-family:constantia,sans-serif;
     color:white;
@@ -44,9 +43,6 @@ table#LoginTable {
     -o-transition: linear 1s;
     transition: linear 1s;
     border-radius:5px;
-}
-label {
-    text-decoration: underline;
 }
 table#LoginTable:hover {
     box-shadow: 5px 3px 35px 12px black;
@@ -78,9 +74,6 @@ div#container {
 #content a:hover {
     text-decoration: underline;
     color:tomato;
-}
-#LoginTable {
-    text-align:center;
 }
 span#sub-title {
     font-weight:bold;

@@ -1,0 +1,22 @@
+body {
+    background:linear-gradient(270deg,wheat,teal);
+    font-family: Monaco,Constantia,sans-serif;
+}
+div#header {
+    padding:0.5% 5%;
+    background:rgba(0,0,0,0.8);
+    line-height: 2;
+    color:white;
+    -webkit-box-shadow: inset 0px -5px 20px black;
+    -moz-box-shadow: inset 0px -5px 20px black;
+    box-shadow: inset 0px -5px 20px black;
+}
+div#header-logo {
+    float:right;
+}
+div#container {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+}

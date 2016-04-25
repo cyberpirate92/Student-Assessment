@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-import Student,Faculty
+from . import views
 from django.conf.urls import include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^student/',include('Student.urls')),
     url(r'^faculty/',include('Faculty.urls')),
+    url(r'^start$',views.main_page),
     url(r'^admin/', admin.site.urls),
 ]
 
