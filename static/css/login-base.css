@@ -1,0 +1,87 @@
+body {
+    background:linear-gradient(270deg,wheat,teal);
+    font-family: Monaco,Constantia,sans-serif;
+}
+#LoginTable input[type='text'], #LoginTable input[type='password'] {
+    padding:2%;
+    font-family:constantia,sans-serif;
+    border:none;
+    text-indent: 5px;
+    border-radius:20px;
+    text-align: center;
+}
+#LoginTable input[type='button'], #LoginTable input[type='submit'],input[type='reset'] {
+    border:none;
+    background:linear-gradient(white,whitesmoke);
+    color:black;
+    padding:2%;
+    font-family:inherit;
+    width:50%;
+    border-radius:20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+#LoginTable input[type='button']:hover, #LoginTable input[type='submit']:hover,input[type='reset']:hover {
+    background:tomato;
+}
+label {
+    font-family:constantia,sans-serif;
+    font-weight:normal;
+}
+table#LoginTable {
+    font-family:constantia,sans-serif;
+    color:white;
+    background:rgba(0,0,0,0.8);
+    margin-left:37%;
+    margin-top:5%;
+    border:none;
+    padding:2%;
+    width:25%;
+    box-shadow: 5px 3px 25px 12px black;
+    -webkit-transition: linear 1s;
+    -moz-transition: linear 1s;
+    -ms-transition: linear 1s;
+    -o-transition: linear 1s;
+    transition: linear 1s;
+    border-radius:5px;
+}
+label {
+    text-decoration: underline;
+}
+table#LoginTable:hover {
+    box-shadow: 5px 3px 35px 12px black;
+}
+div#header {
+    padding:0.5% 5%;
+    background:rgba(0,0,0,0.8);
+    line-height: 2;
+    color:white;
+    -webkit-box-shadow: inset 0px -5px 20px black;
+    -moz-box-shadow: inset 0px -5px 20px black;
+    box-shadow: inset 0px -5px 20px black;
+}
+div#header-logo {
+    float:right;
+}
+div#container {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+}
+#content a {
+    text-decoration:none;
+    color:white;
+    font-family:Monaco,sans-serif;
+    font-size:12px;
+}
+#content a:hover {
+    text-decoration: underline;
+    color:tomato;
+}
+#LoginTable {
+    text-align:center;
+}
+span#sub-title {
+    font-weight:bold;
+}
