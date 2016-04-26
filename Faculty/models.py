@@ -2,6 +2,7 @@ from django.db import models
 import datetime
 from django.utils import timezone
 
+
 class FacultyLogin(models.Model):
     username = models.CharField(max_length=20,primary_key=True)
     password = models.CharField(max_length=255)
@@ -23,8 +24,6 @@ class StudentLogin(models.Model):
 
 
 # django creates a id field which is auto incremented, that will be used for question_id
-
-
 class MCQQuestion(models.Model):
     question = models.TextField()
     question_number = models.IntegerField(default=0)
@@ -35,9 +34,9 @@ class MCQQuestion(models.Model):
     correctAnswer = models.IntegerField(default=0)
     test_id = models.ForeignKey(TestInfo,on_delete=models.CASCADE)
 
+
 # django creates a id field which is auto incremented, that will be used for question_id
-
-
+# @deprecated
 class CodeQuestion(models.Model):
     question = models.TextField()
     question_number = models.IntegerField(default=0)
@@ -49,6 +48,7 @@ class CodeQuestion(models.Model):
     testcase3_output = models.TextField()
     test_id = models.ForeignKey(TestInfo,on_delete=models.CASCADE)
 
+# Use this model instead of CodeQuestion, which will be obsolete soon...
 class CodeQuestionV2(models.Model):
     question = models.TextField()
     question_number = models.IntegerField(default=0)
@@ -56,8 +56,19 @@ class CodeQuestionV2(models.Model):
     visible_test_case_output = models.TextField()
     hidden_test_case_input = models.TextField()
     hidden_test_case_output = models.TextField()
-    max_exec_time = models.IntegerField()
+    max_exec_time = models.FloatField()
+    template_code = models.TextField(null=True)
     test_id = models.ForeignKey(TestInfo,on_delete=models.CASCADE)
+
+
+class CodeQuestionAnswers(models.Model):
+    question_number=models.ForeignKey(CodeQuestionV2,on_delete=models.CASCADE)
+    student_id = models.ForeignKey(StudentLogin,on_delete=models.CASCADE)
+    visible_test_case_results = models.TextField()
+    hidden_test_case_results = models.TextField()
+    execution_time = models.FloatField()
+    user_code = models.TextField()
+
 
 # In the below model, the question id could also be declared to be a foreign key referencing the MCQQuestions Model,
 # but test_id is declared as a foreign key and is enough, because when test_id is removed,

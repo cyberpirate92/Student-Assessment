@@ -15,7 +15,8 @@ class CodeQuestionForm(Form):
 class CodeQuestionFormV2(Form):
     question = forms.CharField(widget=forms.Textarea, label='Question')
     visible_test_case_input = forms.CharField(widget=forms.Textarea, label='Input')
-    visible_test_case_output = forms.CharField(widget=forms.Textarea, label='Ouput')
+    visible_test_case_output = forms.CharField(widget=forms.Textarea, label='Output')
     hidden_test_case_input = forms.CharField(widget=forms.Textarea, label='Input')
     hidden_test_case_output = forms.CharField(widget=forms.Textarea, label='Output')
-    max_exec_time = forms.IntegerField(label='Max Execution Time', initial=60)
+    template_code = forms.CharField(widget=forms.Textarea, label='Code Template', required=False)
+    max_exec_time = forms.IntegerField(label='Max Execution Time', initial=30)

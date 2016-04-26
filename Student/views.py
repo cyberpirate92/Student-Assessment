@@ -102,8 +102,10 @@ def question_view(request,test_id,question_number):
                     compiler = CompilerUtils.Compiler()
                     compiler.set_code(code)
                     compiler.set_language(language)
-                    compiler.delete_code_file()
                     question_obj = CodeQuestionV2.objects.filter(test_id_id=test_id,question_number=question_number)[0]
+                    template_code = question_obj.template_code
+                    if template_code is not None and len(template_code) != 0:
+                        compiler.set_template(template_code)
                     visible_input = question_obj.visible_test_case_input
                     visible_output = question_obj.visible_test_case_output
                     hidden_input = question_obj.hidden_test_case_input
@@ -115,6 +117,7 @@ def question_view(request,test_id,question_number):
                     test_cases.extend(hidden_test_cases)
                     compiler.add_test_cases(test_cases)
                     compiler.execute()
+                    compiler.delete_code_file()
                     status = compiler.exec_status
                     print("[*] Status : " + status.name)
                     template_data['status'] = status

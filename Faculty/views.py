@@ -196,6 +196,7 @@ def createCodeTestv2(request):
                 codeQuestion.visible_test_case_output = form.cleaned_data['visible_test_case_output']
                 codeQuestion.hidden_test_case_input = form.cleaned_data['hidden_test_case_input']
                 codeQuestion.hidden_test_case_output = form.cleaned_data['hidden_test_case_output']
+                codeQuestion.template_code = form.cleaned_data['template_code']
                 codeQuestion.test_id_id = request.session["TEST_ID"]
                 codeQuestion.question_number = request.session['CURRENT_QUESTION']
                 codeQuestion.max_exec_time = form.cleaned_data['max_exec_time']
