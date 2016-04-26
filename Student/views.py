@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect,Http404
 from .forms import LoginForm,CodeSubmissionForm
 from . import CompilerUtils
-from Faculty.models import TestInfo,CodeQuestionV2
+from Faculty.models import TestInfo,CodeQuestionV2,CodeQuestionAnswers
 from Faculty.models import StudentLogin
+import random
 
 # Create your views here.
 
@@ -65,8 +66,16 @@ def initiate_test(request,test_id):
             test_obj = TestInfo.objects.filter(test_id=test_id)
             num_questions = len(CodeQuestionV2.objects.filter(test_id_id=test_id))
             template_data = {"title": test_obj[0].test_name, "test": test_obj[0], "num_questions": num_questions}
-            request.session['current_question'] = 1;
+            request.session['current_question'] = 1
+            request.session['attempt_id'] = generate_attempt_id()
             return render(request,'test_initiate.html',template_data)
+
+
+def generate_attempt_id():
+    while True:
+        generated_id = random.randint(0,100000)
+        if len(CodeQuestionAnswers.objects.filter(attempt_id=generated_id)) == 0:
+            return generated_id
 
 
 def user_is_logged_in(request):
@@ -94,6 +103,7 @@ def question_view(request,test_id,question_number):
             return Http404
         else:
             template_data = dict()
+            code = None
             if request.method == 'POST':
                 form = CodeSubmissionForm(request.POST)
                 if form.is_valid():
@@ -122,14 +132,16 @@ def question_view(request,test_id,question_number):
                     print("[*] Status : " + status.name)
                     template_data['status'] = status
                     template_data['percentage'] = compiler.get_overall_pass_percentage()
-                    if status == CompilerUtils.ExecutionStatus.ACC:
-                        request.session['current_question'] = int(request.session['current_question']) + 1
+                    if 'submit' in request.POST:
+                        return HttpResponseRedirect('/student/tests/' + str(test_id) + '/' + str(int(question_number)+1))
                 else:
                     template_data['error'] = "Invalid submission!"
 
                 # TODO: Update session such that it provides the next question when the answer is accepted
-
-            form = CodeSubmissionForm()
+            if code is None:
+                form = CodeSubmissionForm()
+            else:
+                form = CodeSubmissionForm({'code':code})
             username = request.session['username']
             question_obj = CodeQuestionV2.objects.filter(test_id_id=test_id,question_number=question_number)[0]
             test_obj = TestInfo.objects.filter(test_id = test_id)[0]

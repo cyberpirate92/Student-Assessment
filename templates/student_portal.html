@@ -4,40 +4,40 @@
         <meta charset="UTF-8">
         <title>Student Portal</title>
         {% load staticfiles %}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/base_1.css' %}" />
     </head>
     <body>
-        <div id="header">
-            <table>
-                <tr>
-                    <td align="center" class="bigSpan">
-                        <h2> Student Assessment </h2>
-                        <h3><u> Student Portal </u></h3>
-                    </td>
-                    <td align="right" class="smallSpan">
-                        <a href="logout" id="logoutLink">Logout {{ username }}</a>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div id="content-main">
-            <h4> Code Tests </h4>
-            <table id="code_tests_table" border="2">
-                <tr>
-                    <th> Test Name </th>
-                    <th> Test ID </th>
-                    <th> Faculty </th>
-                    <th> </th>
-                </tr>
-                {% for test in tests %}
+        <div id="container">
+            <div id="header">
+                <div id="header-logo"> <img src="{% static 'images/vit-logo.png' %}" width="200px" height="75px"/> </div>
+                <div id="header-title"><a href="/start"><h2> Assessment </h2></a></div>
+            </div>
+            <div id="nav-bar">
+                <table>
                     <tr>
-                        <td>  {{ test.test_name }} </td>
-                        <td>  {{ test.test_id }} </td>
-                        <td> {{ test.faculty_id_id }} </td>
-                        <td> <a href="tests/{{ test.test_id }}/"> <button> Take Test </button></a> </td>
+                        <td><a href="logout">logout</a></td>
                     </tr>
-                {% endfor %}
-            </table>
+                </table>
+            </div>
+            <div id="content">
+                <h4> Code Tests </h4>
+                <table class="tests-table">
+                    <tr>
+                        <th> Test Name </th>
+                        <th> Test ID </th>
+                        <th> Faculty </th>
+                        <th> </th>
+                    </tr>
+                    {% for test in tests %}
+                        <tr class="{% cycle 'row-odd' 'row-even' %}">
+                            <td>  {{ test.test_name }} </td>
+                            <td>  {{ test.test_id }} </td>
+                            <td> {{ test.faculty_id_id }} </td>
+                            <td> <a href="tests/{{ test.test_id }}/"> <button> Take Test </button></a> </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
         </div>
     </body>
 </html>

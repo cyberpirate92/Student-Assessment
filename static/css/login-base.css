@@ -78,3 +78,7 @@ div#container {
 span#sub-title {
     font-weight:bold;
 }
+#header-title a {
+    text-decoration:none;
+    color:white;
+}

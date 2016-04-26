@@ -20,3 +20,71 @@ div#container {
     left:0;
     right:0;
 }
+#header-title a {
+    text-decoration:none;
+    color:white;
+}
+#nav-bar table {
+    width:100%;
+    text-align:center;
+    padding:0.5%;
+    font-size:0.85em;
+    background:rgba(0,0,0,0.9);
+    color:white;
+}
+#nav-bar td {
+    cursor:pointer;
+}
+#nav-bar a {
+    color:white;
+    text-decoration:none;
+}
+#nav-bar a:hover {
+    text-decoration:underline;
+}
+.tests-table th {
+    background:#5B9BD5;
+    color:black;
+}
+tr.row-even {
+    background:#DDEBF7;
+    color:black;
+    border:none;
+}
+tr.row-odd {
+    background:#FFFFFF;
+    color:black;
+    border:none;
+}
+tr.row-odd:hover, tr.row-even:hover {
+    background:#BCD4EC;
+}
+div#content {
+    margin-left:5%;
+    margin-right:5%;
+    margin-top:2%;
+    background:rgba(0,0,0,0.8);
+    color:white;
+    border-radius:20px;
+    padding:0.5% 5%;
+    height:300px;
+}
+.tests-table {
+    width:75%;
+    font-size:0.85em;
+    border:none;
+}
+.tests-table td, .tests-table th {
+    padding:0.5%;
+    text-align: center;
+    border:none;
+}
+.tests-table button {
+    background:teal;
+    color:white;
+    padding:1%;
+    width:100px;
+    border:none;
+    cursor:pointer;
+    border-radius:20px;
+}

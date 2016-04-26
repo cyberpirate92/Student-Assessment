@@ -66,9 +66,11 @@ class CodeQuestionAnswers(models.Model):
     student_id = models.ForeignKey(StudentLogin,on_delete=models.CASCADE)
     visible_test_case_results = models.TextField()
     hidden_test_case_results = models.TextField()
+    visible_test_case_percentage = models.FloatField()
+    hidden_test_case_percentage = models.FloatField()
     execution_time = models.FloatField()
     user_code = models.TextField()
-
+    attempt_id = models.IntegerField()
 
 # In the below model, the question id could also be declared to be a foreign key referencing the MCQQuestions Model,
 # but test_id is declared as a foreign key and is enough, because when test_id is removed,
